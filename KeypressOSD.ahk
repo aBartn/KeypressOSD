@@ -1,4 +1,4 @@
-; KeypressOSD v2.52 (2018-05-22)
+; KeypressOSD v2.60 (2021-01-30)
 
 #NoEnv
 #SingleInstance force
@@ -7,16 +7,22 @@
 ListLines, Off
 SetBatchLines, -1
 
-global appVersion := "v2.52"
+global appVersion := "v2.60"
 global AutoGuiW, BkColor, Bottom_OffsetX, Bottom_OffsetY, Bottom_Screen, Bottom_Win, DisplaySec, FixedX, FixedY
      , FontColor, FontName, FontSize, FontStyle, GuiHeight, GuiPosition, GuiWidth, SettingsGuiIsOpen
      , ShowModifierKeyCount, ShowMouseButton, ShowSingleKey, ShowSingleModifierKey, ShowStickyModKeyCount
      , Top_OffsetX, Top_OffsetY, Top_Screen, Top_Win, TransN
-     , oLast := {}, hGui_OSD, hGUI_s
+     , oLast, PreviousKey := {}, hGui_OSD, hGUI_s
+global KeyString := []
+
+; saves keys to log file in "C:\Users\{USER}\AppData\Roaming\KeypressOSD\"
+logdir := A_AppData . "\KeypressOSD"
+global log := GetLog(logdir)
 
 #include src/settings.ahk
 #include src/show_hotkeys.ahk
 #include src/get_key_string.ahk
+#include src/log_to_file.ahk
 
 ReadSettings()
 CreateTrayMenu()
@@ -29,6 +35,7 @@ return
 		try {
 			key := GetKeyStr()
 			ShowHotkey(key)
+			LogToFile(key)
 			SetTimer, HideGUI, % -1 * DisplaySec * 1000
 		}
 	return
