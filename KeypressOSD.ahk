@@ -14,6 +14,7 @@ global AutoGuiW, BkColor, Bottom_OffsetX, Bottom_OffsetY, Bottom_Screen, Bottom_
      , Top_OffsetX, Top_OffsetY, Top_Screen, Top_Win, TransN
      , oLast, PreviousKey := {}, hGui_OSD, hGUI_s
 global KeyString := []
+global CapslockIsOn := GetKeyState("Capslock", "T")
 
 ; saves keys to log file in "C:\Users\{USER}\AppData\Roaming\KeypressOSD\"
 logdir := A_AppData . "\KeypressOSD"
