@@ -1,7 +1,12 @@
+
+; saves keys to log file in "C:\Users\{USER}\AppData\Roaming\KeypressOSD\"
+logdir := A_AppData . "\KeypressOSD"
+global log := GetLog(logdir)
 global ActiveFileName := ""
 global ReplacableKeys := {"Enter": "`n", "Space": " ", "Add": "+", "Sub": "-", "Div": "/", "Mult": "*", "Tab": "`t", "Backspace": "▌", "Up": "↑", "Down": "↓", "Right": "→", "Left": "←"}
 ; global ReplacableNumberKeys := ["!", "@", "#", "$", "%", "^", "&", "*", "("]
 ; global ReplacableShiftKeys := {"0": ")", "-": "_", "=": "+", "[": "[", "]": "}", ";": ":", "'": "''", ",": "<", ".": ">", "/": "?", "~": "~", "|": "|"}
+
 
 GetLog(logdir) {
 	FileCreateDir, %logdir%

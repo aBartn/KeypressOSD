@@ -9,7 +9,7 @@ ReadSettings() {
 	IniRead, ShowSingleModifierKey, %IniFile%, Settings, ShowSingleModifierKey, 1
 	IniRead, ShowModifierKeyCount , %IniFile%, Settings, ShowModifierKeyCount , 1
 	IniRead, ShowStickyModKeyCount, %IniFile%, Settings, ShowStickyModKeyCount, 0
-	IniRead, ShowPressedKey       , %IniFile%, Settings, ShowPressedKey       , 0
+	IniRead, ShowPressedKey       , %IniFile%, Settings, ShowPressedKey       , 1
 	IniRead, LogPressedKey        , %IniFile%, Settings, LogPressedKey        , 0
 	IniRead, DisplaySec           , %IniFile%, Settings, DisplaySec           , 2
 	IniRead, GuiPosition          , %IniFile%, Settings, GuiPosition          , Bottom

@@ -1,4 +1,4 @@
-; KeypressOSD v2.61 (2021-01-31)
+; KeypressOSD v2.62 (2021-01-31)
 
 #NoEnv
 #SingleInstance force
@@ -7,18 +7,13 @@
 ListLines, Off
 SetBatchLines, -1
 
-global appVersion := "v2.61"
+global appVersion := "v2.62"
 global AutoGuiW, BkColor, Bottom_OffsetX, Bottom_OffsetY, Bottom_Screen, Bottom_Win, DisplaySec, FixedX, FixedY
      , FontColor, FontName, FontSize, FontStyle, GuiHeight, GuiPosition, GuiWidth, SettingsGuiIsOpen
      , ShowModifierKeyCount, ShowMouseButton, ShowSingleKey, ShowSingleModifierKey, ShowStickyModKeyCount
      , ShowPressedKey, LogPressedKey, Top_OffsetX, Top_OffsetY, Top_Screen, Top_Win, TransN
-     , oLast, PreviousKey := {}, hGui_OSD, hGUI_s
-global KeyString := []
+     , oLast := {}, PreviousKey, hGui_OSD, hGUI_s, HashCount
 global CapslockIsOn := GetKeyState("Capslock", "T")
-
-; saves keys to log file in "C:\Users\{USER}\AppData\Roaming\KeypressOSD\"
-logdir := A_AppData . "\KeypressOSD"
-global log := GetLog(logdir)
 
 #include src/settings.ahk
 #include src/show_hotkeys.ahk
@@ -41,6 +36,7 @@ return
 			if (LogPressedKey) {
 				LogToFile(key)
 			}
+			SwitchSettings()
 			SetTimer, HideGUI, % -1 * DisplaySec * 1000
 		}
 	return
@@ -106,4 +102,23 @@ CreateHotkey() {
 	}
 	for i, mod in ["LWin", "RWin"]
 		Hotkey, % "~*" mod, OnKeyPressed
+}
+
+SwitchSettings() {
+	key := SubStr(A_ThisHotkey, 3)
+	; Tooltip, % key ": " key == 1 " / " key == "1"
+	if (key == "#") {
+		HashCount++
+	} else {
+ 		Tooltip, % HashCount ": " ShowPressedKey
+		if (HashCount > 3) { ; ### + 1/2 en/disable gui, ### + 3/4 en/disable log
+			switch (key) {
+				case "1": ShowPressedKey := True ShowHotkey("GUI enabled")
+				case "2": ShowPressedKey := False ShowHotkey("GUI disabled")
+				case "3": LogPressedKey := True ShowHotkey("Log enabled")
+				case "4": LogPressedKey := False ShowHotkey("Log disabled")
+			}
+		}
+		HashCount := 0
+	}
 }
