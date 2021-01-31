@@ -9,6 +9,8 @@ ReadSettings() {
 	IniRead, ShowSingleModifierKey, %IniFile%, Settings, ShowSingleModifierKey, 1
 	IniRead, ShowModifierKeyCount , %IniFile%, Settings, ShowModifierKeyCount , 1
 	IniRead, ShowStickyModKeyCount, %IniFile%, Settings, ShowStickyModKeyCount, 0
+	IniRead, ShowPressedKey       , %IniFile%, Settings, ShowPressedKey       , 0
+	IniRead, LogPressedKey        , %IniFile%, Settings, LogPressedKey        , 0
 	IniRead, DisplaySec           , %IniFile%, Settings, DisplaySec           , 2
 	IniRead, GuiPosition          , %IniFile%, Settings, GuiPosition          , Bottom
 	IniRead, FontSize             , %IniFile%, Settings, FontSize             , 50
@@ -40,6 +42,8 @@ SaveSettings() {
 	IniWrite, %ShowSingleModifierKey%, %IniFile%, Settings, ShowSingleModifierKey
 	IniWrite, %ShowModifierKeyCount% , %IniFile%, Settings, ShowModifierKeyCount
 	IniWrite, %ShowStickyModKeyCount%, %IniFile%, Settings, ShowStickyModKeyCount
+	IniWrite, %ShowPressedKey%       , %IniFile%, Settings, ShowPressedKey
+	IniWrite, %LogPressedKey%        , %IniFile%, Settings, LogPressedKey
 	IniWrite, %DisplaySec%           , %IniFile%, Settings, DisplaySec
 	IniWrite, %GuiPosition%          , %IniFile%, Settings, GuiPosition
 	IniWrite, %FontSize%             , %IniFile%, Settings, FontSize
@@ -124,6 +128,8 @@ ShowSettingsGUI() {
 	Gui, s:Add, Checkbox, xm h24 vShowSingleModifierKey Checked%ShowSingleModifierKey%, Show Single Modifier Key
 	Gui, s:Add, Checkbox, xm h24 vShowModifierKeyCount Checked%ShowModifierKeyCount%, Show Modifier Key Count
 	Gui, s:Add, Checkbox, xm h24 vShowStickyModKeyCount Checked%ShowStickyModKeyCount%, Show Sticky Modifier Key Count
+	Gui, s:Add, Checkbox, xm h24 vShowPressedKey Checked%ShowPressedKey%, Show Pressed Key
+	Gui, s:Add, Checkbox, xm h24 vLogPressedKey Checked%LogPressedKey%, Log Pressed Key
 
 	sGuiAddTitleText("Window Position")
 		Gui, s:Add, Tab3, xm y+10 Buttons vGuiPosition gUpdateGuiPosition, Bottom|Top|Fixed Position

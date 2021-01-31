@@ -1,4 +1,4 @@
-; KeypressOSD v2.60 (2021-01-30)
+; KeypressOSD v2.61 (2021-01-31)
 
 #NoEnv
 #SingleInstance force
@@ -7,11 +7,11 @@
 ListLines, Off
 SetBatchLines, -1
 
-global appVersion := "v2.60"
+global appVersion := "v2.61"
 global AutoGuiW, BkColor, Bottom_OffsetX, Bottom_OffsetY, Bottom_Screen, Bottom_Win, DisplaySec, FixedX, FixedY
      , FontColor, FontName, FontSize, FontStyle, GuiHeight, GuiPosition, GuiWidth, SettingsGuiIsOpen
      , ShowModifierKeyCount, ShowMouseButton, ShowSingleKey, ShowSingleModifierKey, ShowStickyModKeyCount
-     , Top_OffsetX, Top_OffsetY, Top_Screen, Top_Win, TransN
+     , ShowPressedKey, LogPressedKey, Top_OffsetX, Top_OffsetY, Top_Screen, Top_Win, TransN
      , oLast, PreviousKey := {}, hGui_OSD, hGUI_s
 global KeyString := []
 global CapslockIsOn := GetKeyState("Capslock", "T")
@@ -35,8 +35,12 @@ return
 	OnKeyPressed:
 		try {
 			key := GetKeyStr()
-			ShowHotkey(key)
-			LogToFile(key)
+			if (ShowPressedKey) {
+				ShowHotkey(key)
+			}
+			if (LogPressedKey) {
+				LogToFile(key)
+			}
 			SetTimer, HideGUI, % -1 * DisplaySec * 1000
 		}
 	return
