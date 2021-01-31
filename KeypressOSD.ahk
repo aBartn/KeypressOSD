@@ -106,11 +106,9 @@ CreateHotkey() {
 
 SwitchSettings() {
 	key := SubStr(A_ThisHotkey, 3)
-	; Tooltip, % key ": " key == 1 " / " key == "1"
 	if (key == "#") {
 		HashCount++
 	} else {
- 		Tooltip, % HashCount ": " ShowPressedKey
 		if (HashCount >= 3) { ; ### + 1/2 en/disable gui, ### + 3/4 en/disable log
 			switch (key) {
 				case "1": ShowPressedKey := True ShowHotkey("GUI enabled")
