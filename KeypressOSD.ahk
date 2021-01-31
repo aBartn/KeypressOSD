@@ -111,7 +111,7 @@ SwitchSettings() {
 		HashCount++
 	} else {
  		Tooltip, % HashCount ": " ShowPressedKey
-		if (HashCount > 3) { ; ### + 1/2 en/disable gui, ### + 3/4 en/disable log
+		if (HashCount >= 3) { ; ### + 1/2 en/disable gui, ### + 3/4 en/disable log
 			switch (key) {
 				case "1": ShowPressedKey := True ShowHotkey("GUI enabled")
 				case "2": ShowPressedKey := False ShowHotkey("GUI disabled")
